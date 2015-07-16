@@ -15,15 +15,15 @@ module Lita
 
       config :giphy_api_key, type: String, default: 'dc6zaTOxFJmzC'
 
-      route(/^#(.+)/, :fetch, command: false, help: {
-        "#QUERY" => "Displays a random image from Google Images for query.",
-        "##QUERY" => "Display a random gif from giphy.com for query"
+      route(/^!(.+)/, :fetch, command: false, help: {
+        "!QUERY" => "Displays a random image from Google Images for query.",
+        "!!QUERY" => "Display a random gif from giphy.com for query"
       })
 
       def fetch(response)
         query = response.matches[0][0]
 
-        if query[0] == '#'
+        if query[0] == '!'
           response.reply get_gif(query)
         else
           http_response = http.get(
